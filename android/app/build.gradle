@@ -75,4 +75,11 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.camera:camera-view:1.2.0-alpha02"
+    implementation 'com.combateafraude.sdk:document-detector:6.39.6'
+    // Native Android SDK that the plugin implements
+    
+// design libraries you will use in your layout (these are used in our example template for customization)
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
 }
