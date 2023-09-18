@@ -12,9 +12,13 @@ import 'package:new_face_liveness/passive_face_liveness.dart';
 import 'package:new_face_liveness/result/passive_face_liveness_failure.dart';
 import 'package:new_face_liveness/result/passive_face_liveness_result.dart';
 import 'package:new_face_liveness/result/passive_face_liveness_success.dart';
+import 'package:new_face_liveness/camera_filter.dart';
+import 'package:new_face_liveness/caf_stage.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -51,6 +55,8 @@ class _MyHomePageState extends State<MyHomePage> {
   void _openLiveness() async {
     PassiveFaceLiveness passiveFaceLiveness =
         PassiveFaceLiveness(mobileToken: token, peopleId: cpf);
+    passiveFaceLiveness.setCameraFilter(CameraFilter.NATURAL);
+    passiveFaceLiveness.setStage(CafStage.PROD);
 
     PassiveFaceLivenessResult passiveFaceLivenessResult =
         await passiveFaceLiveness.start();
@@ -70,8 +76,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _openDocumentoscopy() async {
     DocumentDetector documentDetector = DocumentDetector(mobileToken: token);
-    documentDetector.setDocumentFlow(
-        [DocumentDetectorStep(document: DocumentType.RG_FRONT)]);
+    documentDetector.setDocumentFlow([
+      DocumentDetectorStep(document: DocumentType.RG_FRONT),
+    ]);
+    documentDetector.setStage(CafStage.PROD);
+
     DocumentDetectorAndroidSettings androidSettings =
         DocumentDetectorAndroidSettings(
       useEmulator: true,
