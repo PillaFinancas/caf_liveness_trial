@@ -30,9 +30,22 @@ android {
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
+    dataBinding.enabled = true
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    aaptOptions {
+        noCompress "tflite"
+    }
+
+    rootProject.allprojects {
+        repositories {
+            maven { url "https://repo.combateafraude.com/android/release" }
+            maven { url 'https://raw.githubusercontent.com/iProov/android/master/maven/' }
+        }
     }
 
     kotlinOptions {
@@ -61,12 +74,6 @@ android {
             signingConfig signingConfigs.debug
         }
     }
-    rootProject.allprojects {
-    repositories {
-        maven { url "https://repo.combateafraude.com/android/release" }
-        maven { url 'https://raw.githubusercontent.com/iProov/android/master/maven/' }
-    }
-    }
 }
 
 flutter {
@@ -79,7 +86,7 @@ dependencies {
     implementation 'com.combateafraude.sdk:document-detector:6.39.6'
     // Native Android SDK that the plugin implements
     
-// design libraries you will use in your layout (these are used in our example template for customization)
+    // design libraries you will use in your layout (these are used in our example template for customization)
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
 }
